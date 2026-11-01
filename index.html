@@ -3,16 +3,151 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Peter Lilienthal</title>
+  <title>Clean Power Everywhere | Peter Lilienthal</title>
+  <style>
+    :root {
+      --bg: #f6f8f5;
+      --card: #ffffff;
+      --text: #1f2a24;
+      --muted: #5b6b62;
+      --accent: #2f7d4f;
+      --accent-soft: #e4f1e8;
+      --sun: #f2b632;
+      --border: #dde5df;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #121814;
+        --card: #1b231e;
+        --text: #e6ede8;
+        --muted: #9db0a4;
+        --accent: #6cc58f;
+        --accent-soft: #20352a;
+        --border: #2b372f;
+      }
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      line-height: 1.6;
+    }
+    .wrap {
+      max-width: 820px;
+      margin: 0 auto;
+      padding: 56px 20px 40px;
+    }
+    header { margin-bottom: 32px; }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin: 0;
+      font-size: clamp(1.8rem, 5vw, 2.6rem);
+      letter-spacing: -0.02em;
+    }
+    .brand svg { flex: none; }
+    .byline { margin: 4px 0 0; color: var(--muted); }
+    .intro {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-left: 5px solid var(--accent);
+      border-radius: 12px;
+      padding: 22px 26px;
+      font-size: 1.15rem;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.04);
+      margin: 0 0 44px;
+    }
+    .intro p { margin: 0; }
+    h2 {
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--muted);
+      margin: 0 0 14px;
+    }
+    .projects {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 16px;
+    }
+    .projects a {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      height: 100%;
+      padding: 20px 22px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      color: var(--text);
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 1.05rem;
+      transition: transform 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease;
+    }
+    .projects a::after {
+      content: "\2192";
+      color: var(--accent);
+      font-size: 1.2rem;
+      transition: transform 0.15s ease;
+    }
+    .projects a:hover,
+    .projects a:focus-visible {
+      transform: translateY(-2px);
+      border-color: var(--accent);
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+      outline: none;
+    }
+    .projects a:hover::after,
+    .projects a:focus-visible::after { transform: translateX(3px); }
+    footer {
+      margin-top: 56px;
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+  </style>
 </head>
 <body>
-  <p>This is a test of my new home page</p>
+  <div class="wrap">
+    <header>
+      <h1 class="brand">
+        <svg width="40" height="40" viewBox="0 0 40 40" aria-hidden="true">
+          <circle cx="20" cy="20" r="8" fill="#f2b632"/>
+          <g stroke="#f2b632" stroke-width="3" stroke-linecap="round">
+            <line x1="20" y1="3" x2="20" y2="8"/>
+            <line x1="20" y1="32" x2="20" y2="37"/>
+            <line x1="3" y1="20" x2="8" y2="20"/>
+            <line x1="32" y1="20" x2="37" y2="20"/>
+            <line x1="8" y1="8" x2="11.5" y2="11.5"/>
+            <line x1="28.5" y1="28.5" x2="32" y2="32"/>
+            <line x1="8" y1="32" x2="11.5" y2="28.5"/>
+            <line x1="28.5" y1="11.5" x2="32" y2="8"/>
+          </g>
+        </svg>
+        Clean Power Everywhere
+      </h1>
+      <p class="byline">Peter Lilienthal</p>
+    </header>
 
-  <h2>Projects</h2>
-  <ul>
-    <li><a href="/solar-battery-simulator/">Solar Battery Simulator</a></li>
-    <li><a href="/pv-batt-est/">PV + Battery Estimator</a></li>
-    <li><a href="/Temperature-graph/">Temperature Graph</a></li>
-  </ul>
+    <section class="intro">
+      <p>My goal in creating the HOMER software was for a simple model that helped people get clean power everywhere. These are even simpler pieces of software.</p>
+    </section>
+
+    <h2>Projects</h2>
+    <ul class="projects">
+      <li><a href="/solar-battery-simulator/">Solar Battery Simulator</a></li>
+      <li><a href="/pv-batt-est/">PV + Battery Estimator</a></li>
+      <li><a href="/Temperature-graph/">Temperature Graph</a></li>
+    </ul>
+
+    <footer>cleanpowereverywhere.com</footer>
+  </div>
 </body>
 </html>
