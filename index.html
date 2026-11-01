@@ -73,14 +73,13 @@
       padding: 0;
       margin: 0;
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      grid-template-columns: 1fr;
       gap: 16px;
     }
     .projects a {
       display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 12px;
+      flex-direction: column;
+      gap: 8px;
       height: 100%;
       padding: 20px 22px;
       background: var(--card);
@@ -92,11 +91,24 @@
       font-size: 1.05rem;
       transition: transform 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease;
     }
-    .projects a::after {
+    .projects .title {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+    .projects .title::after {
       content: "\2192";
       color: var(--accent);
       font-size: 1.2rem;
       transition: transform 0.15s ease;
+    }
+    .projects .desc {
+      margin: 0;
+      color: var(--muted);
+      font-weight: 400;
+      font-size: 0.95rem;
+      line-height: 1.5;
     }
     .projects a:hover,
     .projects a:focus-visible {
@@ -105,8 +117,8 @@
       box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
       outline: none;
     }
-    .projects a:hover::after,
-    .projects a:focus-visible::after { transform: translateX(3px); }
+    .projects a:hover .title::after,
+    .projects a:focus-visible .title::after { transform: translateX(3px); }
     footer {
       margin-top: 56px;
       color: var(--muted);
@@ -142,9 +154,14 @@
 
     <h2>Projects</h2>
     <ul class="projects">
-      <li><a href="/solar-battery-simulator/">Solar Battery Simulator</a></li>
-      <li><a href="/pv-batt-est/">PV + Battery Estimator</a></li>
-      <li><a href="/Temperature-graph/">Temperature Graph</a></li>
+      <li>
+        <a href="/solar-battery-simulator/">
+          <span class="title">Solar Battery Simulator</span>
+          <span class="desc">This is the flagship model. It was originally conceived to show how cost-effective cooking with PV could be. It can actually be used to look at any application that uses load management instead of a backup generator or grid connection.</span>
+        </a>
+      </li>
+      <li><a href="/pv-batt-est/"><span class="title">PV + Battery Estimator</span></a></li>
+      <li><a href="/Temperature-graph/"><span class="title">Temperature Graph</span></a></li>
     </ul>
 
     <footer>cleanpowereverywhere.com</footer>
