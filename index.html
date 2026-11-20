@@ -76,7 +76,8 @@
       grid-template-columns: 1fr;
       gap: 16px;
     }
-    .projects a {
+    .projects > li > a,
+    .projects .card {
       display: flex;
       flex-direction: column;
       gap: 8px;
@@ -110,15 +111,43 @@
       font-size: 0.95rem;
       line-height: 1.5;
     }
-    .projects a:hover,
-    .projects a:focus-visible {
+    .projects .card .title::after { content: none; }
+    .versions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 4px;
+    }
+    .versions .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 16px;
+      border: 1px solid var(--accent);
+      border-radius: 999px;
+      background: var(--accent-soft);
+      color: var(--accent);
+      font-weight: 600;
+      font-size: 0.95rem;
+      text-decoration: none;
+      transition: background 0.15s ease, color 0.15s ease;
+    }
+    .versions .btn::after { content: "\2192"; }
+    .versions .btn:hover,
+    .versions .btn:focus-visible {
+      background: var(--accent);
+      color: var(--card);
+      outline: none;
+    }
+    .projects > li > a:hover,
+    .projects > li > a:focus-visible {
       transform: translateY(-2px);
       border-color: var(--accent);
       box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
       outline: none;
     }
-    .projects a:hover .title::after,
-    .projects a:focus-visible .title::after { transform: translateX(3px); }
+    .projects > li > a:hover .title::after,
+    .projects > li > a:focus-visible .title::after { transform: translateX(3px); }
     footer {
       margin-top: 56px;
       color: var(--muted);
@@ -155,10 +184,14 @@
     <h2>Projects</h2>
     <ul class="projects">
       <li>
-        <a href="/solar-battery-simulator/">
+        <div class="card">
           <span class="title">Solar Battery Simulator</span>
           <span class="desc">This is the flagship model. It was originally conceived to show how cost-effective cooking with PV could be. It can actually be used to look at any application that uses load management instead of a backup generator or grid connection.</span>
-        </a>
+          <div class="versions" role="group" aria-label="Choose a version">
+            <a class="btn" href="/solar-battery-simulator/?advanced=0">Basic version</a>
+            <a class="btn" href="/solar-battery-simulator/?advanced=1">Advanced version</a>
+          </div>
+        </div>
       </li>
       <li>
         <a href="/pv-batt-est/">
