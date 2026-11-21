@@ -133,6 +133,49 @@
       transition: background 0.15s ease, color 0.15s ease;
     }
     .versions .btn::after { content: "\2192"; }
+    .tip-wrap { position: relative; display: inline-flex; }
+    .tip-wrap .tooltip {
+      position: absolute;
+      bottom: calc(100% + 10px);
+      left: 50%;
+      transform: translateX(-50%) translateY(4px);
+      width: max-content;
+      max-width: min(280px, calc(100vw - 32px));
+      padding: 10px 12px;
+      border-radius: 8px;
+      background: var(--text);
+      color: var(--card);
+      font-size: 0.85rem;
+      font-weight: 400;
+      line-height: 1.45;
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.18);
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+      transition: opacity 0.15s ease, transform 0.15s ease, visibility 0.15s;
+      z-index: 10;
+    }
+    .tip-wrap .tooltip::after {
+      content: "";
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      transform: translateX(-50%);
+      border: 6px solid transparent;
+      border-top-color: var(--text);
+    }
+    .tip-wrap:hover .tooltip,
+    .tip-wrap:focus-within .tooltip {
+      opacity: 1;
+      visibility: visible;
+      transform: translateX(-50%) translateY(0);
+    }
+    @media (max-width: 600px) {
+      .tip-wrap .tooltip { left: 0; transform: translateY(4px); }
+      .tip-wrap:hover .tooltip,
+      .tip-wrap:focus-within .tooltip { transform: translateY(0); }
+      .tip-wrap .tooltip::after { left: 28px; }
+    }
     .versions .btn:hover,
     .versions .btn:focus-visible {
       background: var(--accent);
@@ -189,7 +232,10 @@
           <span class="desc">This is the flagship model. It was originally conceived to show how cost-effective cooking with PV could be. It can actually be used to look at any application that uses load management instead of a backup generator or grid connection.</span>
           <div class="versions" role="group" aria-label="Choose a version">
             <a class="btn" href="/solar-battery-simulator/?advanced=0">Basic version</a>
-            <a class="btn" href="/solar-battery-simulator/?advanced=1">Advanced version</a>
+            <span class="tip-wrap">
+              <a class="btn" href="/solar-battery-simulator/?advanced=1" aria-describedby="adv-tip">Advanced version</a>
+              <span class="tooltip" id="adv-tip" role="tooltip">The Advanced version optimizes the C&#8209;rate for the battery and includes a $/kWh cost for unmet energy.</span>
+            </span>
           </div>
         </div>
       </li>
