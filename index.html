@@ -164,17 +164,49 @@
       border: 6px solid transparent;
       border-top-color: var(--text);
     }
-    .tip-wrap:hover .tooltip,
-    .tip-wrap:focus-within .tooltip {
+    .tip-wrap { align-items: center; gap: 6px; }
+    .info-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 22px;
+      height: 22px;
+      padding: 0;
+      border: 1.5px solid var(--accent);
+      border-radius: 50%;
+      background: var(--card);
+      color: var(--accent);
+      font: italic 700 13px/1 Georgia, "Times New Roman", serif;
+      cursor: pointer;
+      flex-shrink: 0;
+      position: relative;
+    }
+    /* Bigger invisible tap target for phones */
+    .info-btn::before { content: ""; position: absolute; inset: -11px; }
+    .info-btn:hover,
+    .info-btn[aria-expanded="true"],
+    .info-btn:focus-visible { background: var(--accent); color: var(--card); outline: none; }
+    .tip-wrap.open .tooltip,
+    .tip-wrap:has(:focus-visible) .tooltip {
       opacity: 1;
       visibility: visible;
       transform: translateX(-50%) translateY(0);
     }
+    @media (hover: hover) {
+      .tip-wrap:hover .tooltip {
+        opacity: 1;
+        visibility: visible;
+        transform: translateX(-50%) translateY(0);
+      }
+    }
     @media (max-width: 600px) {
       .tip-wrap .tooltip { left: 0; transform: translateY(4px); }
-      .tip-wrap:hover .tooltip,
-      .tip-wrap:focus-within .tooltip { transform: translateY(0); }
+      .tip-wrap.open .tooltip,
+      .tip-wrap:has(:focus-visible) .tooltip { transform: translateY(0); }
       .tip-wrap .tooltip::after { left: 28px; }
+    }
+    @media (max-width: 600px) and (hover: hover) {
+      .tip-wrap:hover .tooltip { transform: translateY(0); }
     }
     .versions .btn:hover,
     .versions .btn:focus-visible {
@@ -234,6 +266,7 @@
             <a class="btn" href="/solar-battery-simulator/?advanced=0">Basic version</a>
             <span class="tip-wrap">
               <a class="btn" href="/solar-battery-simulator/?advanced=1" aria-describedby="adv-tip">Advanced version</a>
+              <button type="button" class="info-btn" aria-label="What is the Advanced version?" aria-expanded="false" aria-controls="adv-tip">i</button>
               <span class="tooltip" id="adv-tip" role="tooltip">The Advanced version optimizes the C&#8209;rate for the battery and includes a $/kWh cost for unmet energy.</span>
             </span>
           </div>
@@ -255,5 +288,15 @@
 
     <footer>cleanpowereverywhere.com</footer>
   </div>
+  <script>
+    // Tap/click the circled "i" to show or hide its tooltip (phones have no hover).
+    document.querySelectorAll('.tip-wrap .info-btn').forEach(function (btn) {
+      var wrap = btn.closest('.tip-wrap');
+      function set(open) { wrap.classList.toggle('open', open); btn.setAttribute('aria-expanded', open); }
+      btn.addEventListener('click', function (e) { e.stopPropagation(); set(!wrap.classList.contains('open')); });
+      document.addEventListener('click', function (e) { if (!wrap.contains(e.target)) set(false); });
+      document.addEventListener('keydown', function (e) { if (e.key === 'Escape') set(false); });
+    });
+  </script>
 </body>
 </html>
